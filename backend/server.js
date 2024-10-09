@@ -1,9 +1,9 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const router = express.Router(); 
-const { reportIssue } = require('./controllers/issueController'); // Import the controller
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const router = express.Router();
+const { reportIssue } = require("./controllers/issueController"); // Import the controller
 const port = process.env.PORT || 5000;
 
 const app = express();
@@ -12,26 +12,24 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-
-
 // Import Routes
-const authRoutes = require('./routes/authRoutes');
-const issueApi = require('./routes/issueApi');
+const authRoutes = require("./routes/authRoutes");
+const issueApi = require("./routes/issueApi");
 
 // Use Routes
-app.use('/api/auth', authRoutes);
-app.use('/api', issueApi);
+app.use("/api/auth", authRoutes);
+app.use("/api", issueApi);
 
 // Connect to MongoDB and start server
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log('MongoDB connected');
-        app.listen(port, () => console.log(`Server running on port ${port}`));
-    })
-    .catch((err) => console.log(err));
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("MongoDB connected");
+    app.listen(port, () => console.log(`Server running on port ${port}`));
+  })
+  .catch((err) => console.log(err));
 
-const multer = require('multer');
-
+const multer = require("multer");
 
 // ---------------------deployement---------------------
 
@@ -40,7 +38,7 @@ const path = require("path");
 app.use(express.static(path.join(__dirname, "../")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../index.html"));
+  res.sendFile(path.join(__dirname, "..//"));
 });
 
 // Serve other HTML files based on their URL
@@ -97,7 +95,4 @@ app.get("*", (req, res) => {
   res.status(404).sendFile(path.join(__dirname, "../404.html"));
 });
 
-
 // ---------------------deployement---------------------
-
-
