@@ -36,16 +36,68 @@ const multer = require('multer');
 // ---------------------deployement---------------------
 
 const path = require("path");
-app.use(
-  express.static(path.join("D:", "My Projects", "BOVHackthon", "CivicIssues"))
-);
 
-// For all other routes, send the index.html file from the CivicIssues folder
-app.get("*", (req, res) => {
-  res.sendFile(
-    path.join("D:", "My Projects", "BOVHackthon", "CivicIssues", "index.html")
-  );
+app.use(express.static(path.join(__dirname, "../")));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../index.html"));
 });
+
+// Serve other HTML files based on their URL
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, "../about.html"));
+});
+
+app.get("/report-issue", (req, res) => {
+  res.sendFile(path.join(__dirname, "../blog.html"));
+});
+
+app.get("/blog", (req, res) => {
+  res.sendFile(path.join(__dirname, "../blogPage.html"));
+});
+
+app.get("/contact", (req, res) => {
+  res.sendFile(path.join(__dirname, "../contact.html"));
+});
+
+app.get("/dashboard", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dashboard.html"));
+});
+
+app.get("/FAQ", (req, res) => {
+  res.sendFile(path.join(__dirname, "../FAQ.html"));
+});
+
+app.get("/features", (req, res) => {
+  res.sendFile(path.join(__dirname, "../feature.html"));
+});
+
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "../login.html"));
+});
+
+app.get("/services", (req, res) => {
+  res.sendFile(path.join(__dirname, "../service.html"));
+});
+
+app.get("/signup", (req, res) => {
+  res.sendFile(path.join(__dirname, "../signup.html"));
+});
+
+app.get("/team", (req, res) => {
+  res.sendFile(path.join(__dirname, "../team.html"));
+});
+
+app.get("/testimonial", (req, res) => {
+  res.sendFile(path.join(__dirname, "../testimonial.html"));
+});
+
+// Handle 404 errors by serving 404.html
+app.get("*", (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, "../404.html"));
+});
+
+
 // ---------------------deployement---------------------
 
 
