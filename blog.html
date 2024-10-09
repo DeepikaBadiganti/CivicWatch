@@ -526,7 +526,7 @@
 
             const userInfo = JSON.parse(localStorage.getItem('userInfo'));
             try {
-                const response = await fetch('http://localhost:4500/api/report-issue', {
+                const response = await fetch('https://civicwatch.onrender.com/api/report-issue', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${userInfo.token}` // Ensure the token is present here

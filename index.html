@@ -1150,18 +1150,7 @@
 
         window.onload = check;
 
-        document.getElementById('logout').addEventListener('click', function () {
-            // Show a confirmation dialog
-            const confirmation = confirm('Are you sure you want to log out?');
-
-            // If the user confirmed the logout
-            if (confirmation) {
-                localStorage.removeItem('token'); // Clear token
-                localStorage.removeItem('userInfo'); // Clear user info
-                alert('Logged out successfully.'); // Notify the user
-                window.location.href = 'login.html'; // Redirect to login page
-            }
-        });
+        
 
     </script>
 
