@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>CivicWatch - Your Eyes on a Better Community</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:slnt,wght@-10..0,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="lib/animate/animate.min.css" />
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+
+
+
+    <style>
+        body {
+            padding-top: 60px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+        }
+
+        .table-responsive {
+            margin-top: 30px;
+        }
+
+        /* Animation for user status */
+        .status-indicator {
+            height: 60%;
+            width: 30%;
+            border-radius: 10px;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                background-color: green;
+            }
+
+
+        }
+
+        /* Responsive for smaller devices */
+        @media only screen and (max-width: 600px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animation for the cards on load */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated-card {
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .profile {
+            width: 50%;
+            height: 50%;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+    </style>
+    <style>
+        /* Status badge colors */
+        .badge-success {
+            background-color: #28a745 !important;
+        }
+
+        .badge-warning {
+            background-color: #ffc107 !important;
+        }
+
+        .badge-danger {
+            background-color: #dc3545 !important;
+        }
+
+        .badge-secondary {
+            background-color: #6c757d !important;
+        }
+
+        /* Animations for the cards */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Apply the animation to the stats cards */
+    </style>
+</head>
+
+<body>
+
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a href="index.html" class="navbar-brand p-0">
+                    <h1 class="text-primary mb-0"><i class="fas fa-city me-2"></i> CivicWatch</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-0 mx-lg-auto">
+                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="service.html" class="nav-item nav-link">Services</a>
+                        <a href="blogPage.html" class="nav-item nav-link active">Blog</a>
+                        <a href="blog.html" class="nav-item nav-link ">ReportIssue</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link" data-bs-toggle="dropdown">
+                                <span class="dropdown-toggle">Pages</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="feature.html" class="dropdown-item">Our Features</a>
+                                <a href="team.html" class="dropdown-item">Our team</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="blogPage.html" class="dropdown-item">Blog</a>
+                                <a href="FAQ.html" class="dropdown-item">FAQs</a>
+
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <div class="nav-btn px-3">
+
+                            <a href="dashboard.html" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0">
+                                DashBoard</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-none d-xl-flex flex-shrink-0 ps-4">
+                    <!-- Profile Icon Trigger for Modal -->
+                    <a href="#" id="profileIcon"
+                        class="btn btn-light btn-lg-square rounded-circle position-relative wow tada"
+                        data-wow-delay=".9s" data-bs-toggle="modal" data-bs-target="#userProfileModal">
+                        <i class="fa fa-user-circle fa-2x"></i>
+                        <!-- Settings Cog Icon -->
+                        <div class="position-absolute" style="top: 7px; right: 12px;">
+                            <span><i class="fa fa-cog text-secondary"></i></span>
+                        </div>
+                    </a>
+
+                    <!-- User Profile Modal -->
+                    <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-primary" id="userProfileModalLabel">User Profile</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <img src="img/profile.jpg" class="profile rounded-circle mb-3"
+                                        alt="Profile Picture" />
+                                    <p id="userName" class="user-info"><strong>Name: </strong></p>
+                                    <p id="userEmail" class="user-info"><strong>Email: </strong></p>
+                                    <p><strong>Status: </strong><span id="userStatus"
+                                            class="badge bg-success">Active</span></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column ms-3">
+                        <div class="mt-2">
+                            <a href="" id="logout" class="btn btn-primary ">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar & Hero End -->
+
+    <!-- Main Container -->
+    <div class="container py-5">
+        <div class="text-center">
+            <h1>Civic Issues Reporting Dashboard</h1>
+            <p>Manage and track all civic issues reported by citizens in your area.</p>
+        </div>
+
+        <!-- User Details Section -->
+        <div class="row">
+            <!-- User Profile Section -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card user-details-card bg-light shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-primary">User Profile</h5>
+                        <img src="img/profile.jpg" class="profile" alt="Profile Picture" class="rounded-circle mb-3" />
+                        <p id="name" class="user-info">Name: </strong></p>
+                        <p id="email" class="user-info">Email: </p>
+                        <p>Status: <span id="status" class="status-indicator badge badge-success">Active</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side Content Section -->
+            <div class="col-lg-8 col-md-6 mb-4">
+                <div class="card bg-light shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Additional Information</h5>
+                        <p>Here you can add any additional content related to the user. This could include user
+                            activity,
+                            statistics, or other relevant details.</p>
+                        <ul class="list-group">
+                            <li class="list-group-item">User Activity: Active in the last 30 days</li>
+                            <li class="list-group-item">Reports Submitted: 5</li>
+                            <li class="list-group-item">Resolved Reports: 3</li>
+                            <li class="list-group-item">Pending Reports: 2</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Dashboard Statistics -->
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-6 mb-4 ">
+                <div class="counter-item bg-primary rounded p-3 h-100 text-white">
+                    <div class="counter-counting">
+                        <span class="fs-2 fw-bold" data-toggle="counter-up" id="totalReports">240</span>
+                        <span class="h1 fw-bold text-white">+</span>
+                    </div>
+                    <h4 class="mb-0">Total Reports</h4>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4 ">
+                <div class="counter-item bg-success rounded p-3 h-100 text-white">
+                    <div class="counter-counting">
+                        <span class="fs-2 fw-bold" data-toggle="counter-up" id="solvedReports">150</span>
+                        <span class="h1 fw-bold text-white">+</span>
+                    </div>
+                    <h4 class="mb-0">Solved Reports</h4>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4 ">
+                <div class="counter-item badge-warning rounded p-3 h-100 text-white">
+                    <div class="counter-counting">
+                        <span class="fs-2 fw-bold" data-toggle="counter-up" id="solvedReports">60</span>
+                        <span class="h1 fw-bold text-white">+</span>
+                    </div>
+                    <h4 class="mb-0">In Progress</h4>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 ">
+                <div class="counter-item bg-danger rounded p-3 h-100 text-white">
+                    <div class="counter-counting">
+                        <span class="fs-2 fw-bold" data-toggle="counter-up" id="solvedReports">30</span>
+                        <span class="h1 fw-bold text-white">+</span>
+                    </div>
+                    <h4 class="mb-0">Pending</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reported Issues Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Issue</th>
+                        <th>Location</th>
+                        <th>Date Reported</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="issuesTableBody">
+                    <!-- Rows will be inserted dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-xl-9">
+                    <div class="mb-5">
+                        <div class="row g-4">
+                            <div class="col-md-6 col-lg-6 col-xl-5">
+                                <div class="footer-item">
+                                    <a href="index.html" class="p-0">
+                                        <h3 class="text-white"><i class="fab fa-slack me-3"></i> CivicWatch</h3>
+                                    </a>
+                                    <p class="text-white mb-4">Your one-stop platform for civic issues in Andhra
+                                        Pradesh.
+                                        Stay informed, report issues, and engage with your community.</p>
+                                    <div class="footer-btn d-flex">
+                                        <a class="btn btn-md-square rounded-circle me-3" href="#"><i
+                                                class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-md-square rounded-circle me-3" href="#"><i
+                                                class="fab fa-twitter"></i></a>
+                                        <a class="btn btn-md-square rounded-circle me-3" href="#"><i
+                                                class="fab fa-instagram"></i></a>
+                                        <a class="btn btn-md-square rounded-circle me-0" href="#"><i
+                                                class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-3">
+                                <div class="footer-item">
+                                    <h4 class="text-white mb-4">Useful Links</h4>
+                                    <a href="#"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                                    <a href="#"><i class="fas fa-angle-right me-2"></i> Report Issues</a>
+                                    <a href="#"><i class="fas fa-angle-right me-2"></i> Services</a>
+                                    <a href="#"><i class="fas fa-angle-right me-2"></i> FAQs</a>
+                                    <a href="#"><i class="fas fa-angle-right me-2"></i> Contact Us</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-4">
+                                <div class="footer-item">
+                                    <h4 class="mb-4 text-white">Instagram</h4>
+                                    <div class="row g-3">
+                                        <div class="col-4">
+                                            <div class="footer-instagram rounded">
+                                                <img src="img/instagram-footer-1.jpg" class="img-fluid w-100" alt="">
+                                                <div class="footer-search-icon">
+                                                    <a href="img/instagram-footer-1.jpg"
+                                                        data-lightbox="footerInstagram-1" class="my-auto"><i
+                                                            class="fas fa-link text-white"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="footer-instagram rounded">
+                                                <img src="img/instagram-footer-2.jpg" class="img-fluid w-100" alt="">
+                                                <div class="footer-search-icon">
+                                                    <a href="img/instagram-footer-2.jpg"
+                                                        data-lightbox="footerInstagram-2" class="my-auto"><i
+                                                            class="fas fa-link text-white"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="footer-instagram rounded">
+                                                <img src="img/instagram-footer-3.jpg" class="img-fluid w-100" alt="">
+                                                <div class="footer-search-icon">
+                                                    <a href="img/instagram-footer-3.jpg"
+                                                        data-lightbox="footerInstagram-3" class="my-auto"><i
+                                                            class="fas fa-link text-white"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="footer-instagram rounded">
+                                                <img src="img/instagram-footer-4.jpg" class="img-fluid w-100" alt="">
+                                                <div class="footer-search-icon">
+                                                    <a href="img/instagram-footer-4.jpg"
+                                                        data-lightbox="footerInstagram-4" class="my-auto"><i
+                                                            class="fas fa-link text-white"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="footer-instagram rounded">
+                                                <img src="img/instagram-footer-5.jpg" class="img-fluid w-100" alt="">
+                                                <div class="footer-search-icon">
+                                                    <a href="img/instagram-footer-5.jpg"
+                                                        data-lightbox="footerInstagram-5" class="my-auto"><i
+                                                            class="fas fa-link text-white"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="footer-instagram rounded">
+                                                <img src="img/instagram-footer-6.jpg" class="img-fluid w-100" alt="">
+                                                <div class="footer-search-icon">
+                                                    <a href="img/instagram-footer-6.jpg"
+                                                        data-lightbox="footerInstagram-6" class="my-auto"><i
+                                                            class="fas fa-link text-white"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-5" style="border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                        <div class="row g-0">
+                            <div class="col-12">
+                                <div class="row g-4">
+                                    <div class="col-lg-6 col-xl-4">
+                                        <div class="d-flex">
+                                            <div class="btn-xl-square bg-primary text-white rounded p-4 me-4">
+                                                <i class="fas fa-map-marker-alt fa-2x"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="text-white">Address</h4>
+                                                <p class="mb-0">Andhra Municipal Corporation<br>123 Civic Center,
+                                                    Amaravathi<br>Andhra
+                                                    Pradesh, India</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-xl-4">
+                                        <div class="d-flex">
+                                            <div class="btn-xl-square bg-primary text-white rounded p-4 me-4">
+                                                <i class="fas fa-envelope fa-2x"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="text-white">Mail Us</h4>
+                                                <p class="mb-0">info@civicwatch.com</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-xl-4">
+                                        <div class="d-flex">
+                                            <div class="btn-xl-square bg-primary text-white rounded p-4 me-4">
+                                                <i class="fa fa-phone-alt fa-2x"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="text-white">Telephone</h4>
+                                                <p class="mb-0">(+91) 1234 567 890</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3">
+                    <div class="footer-item">
+                        <h4 class="text-white mb-4">Newsletter</h4>
+                        <p class="text-white mb-3">Stay updated with the latest civic issues and solutions. Subscribe to
+                            our
+                            newsletter!</p>
+                        <div class="position-relative rounded-pill mb-4">
+                            <input class="form-control rounded-pill w-100 py-3 ps-4 pe-5" type="text"
+                                placeholder="Enter your email">
+                            <button type="button"
+                                class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">SignUp</button>
+                        </div>
+                        <div class="d-flex flex-shrink-0">
+                            <div class="footer-btn">
+                                <a href="#" class="btn btn-lg-square rounded-circle position-relative wow tada"
+                                    data-wow-delay=".9s">
+                                    <i class="fa fa-phone-alt fa-2x"></i>
+                                    <div class="position-absolute" style="top: 2px; right: 12px;">
+                                        <span><i class="fa fa-comment-dots text-secondary"></i></span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="d-flex flex-column ms-3 flex-shrink-0">
+                                <span>Call to Our Experts</span>
+                                <a href="tel:+ 0123 456 7890"><span class="text-white">Free: + 0123 456 7890</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-5 text-center text-md-end mb-md-0">
+                    <span class="text-body"><a href="#" class="border-bottom text-white"><i
+                                class="fas fa-copyright text-light me-2"></i>CivicWatch</a>, All right
+                        reserved.</span>
+                </div>
+                <div class="col-md-6 text-center text-md-start text-body">
+                    <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
+                    <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+                    <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                    Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">Municipal Coporation of
+                        AP</a>
+                    Distributed By <a class="border-bottom text-white" href="https://themewagon.com">Government of
+                        AP</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script>
+        const userinfo = localstorage.getitem('userinfo');
+
+        if (!userinfo) {
+            // if no token, redirect to the login page
+            window.location.href = 'login.html';
+        }
+
+
+    </script>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript to handle dynamic data -->
+    <script>
+        // Sample hardcoded issues array
+
+        const issues = [
+            { id: 1, issue: 'Broken Street Light', location: '5th Avenue', date: '2023-09-01', status: 'Solved' },
+            { id: 2, issue: 'Potholes on Main Street', location: 'Main St', date: '2023-09-05', status: 'In Progress' },
+            { id: 3, issue: 'Illegal Dumping', location: 'Park Lane', date: '2023-09-12', status: 'Pending' },
+            { id: 4, issue: 'Water Leakage', location: 'Elm St', date: '2023-09-15', status: 'Solved' }
+        ];
+
+        // Populate issues table
+        function populateIssuesTable(issues) {
+            const tableBody = document.getElementById('issuesTableBody');
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            issues.forEach((issue, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${issue.issue}</td>
+                        <td>${issue.location}</td>
+                        <td>${new Date(issue.date).toLocaleDateString()}</td> <!-- Format date -->
+                        <td><span class="badge ${getStatusClass(issue.status)}">${issue.status}</span></td>
+                        <td><button class="btn btn-primary btn-sm">View</button></td>
+                    `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Helper function to assign status class for styling
+        function getStatusClass(status) {
+            switch (status) {
+                case 'Solved': return 'badge-success';
+                case 'In Progress': return 'badge-warning';
+                case 'Pending': return 'badge-danger';
+                default: return 'badge-secondary';
+            }
+        }
+
+        // Fetch user details
+        async function fetchUserDetails() {
+            try {
+                // Replace with your API call if needed
+                const userInfo = JSON.parse(localStorage.getItem('userInfo')); // Fetch from localStorage for example
+                const { user } = userInfo;
+
+                // Set user details
+                document.getElementById('userName').innerText = `Name: ${user.name}`;
+                document.getElementById('userEmail').innerText = `Email: ${user.email}`;
+
+                // Update user status (this could be dynamic based on fetched user data)
+                const statusIndicator = document.getElementById('userStatus');
+                statusIndicator.style.backgroundColor = user.status === 'active' ? 'green' : 'red'; // Example
+            } catch (error) {
+                console.error('Error fetching user details:', error);
+            }
+        }
+
+        // Fetch issues from API or use the hardcoded array
+        async function fetchIssues() {
+            try {
+                // If you have an API, use the fetch request below. For now, it's hardcoded.
+                // const response = await fetch('https://api.example.com/issues');
+                // if (!response.ok) throw new Error('Network response was not ok');
+                // const issues = await response.json();
+
+                // For now, we're using the hardcoded `issues` array.
+                populateIssuesTable(issues);
+            } catch (error) {
+                console.error('Error fetching issues:', error);
+            }
+        }
+
+        async function check() {
+            const userinfo = localStorage.getItem('userInfo');
+
+            if (!userinfo) {
+                // if no token, redirect to the login page
+                window.location.href = 'login.html';
+            }
+        }
+
+        async function getUserDetails() {
+            try {
+                // Replace with your API call if needed
+                const userInfo = JSON.parse(localStorage.getItem('userInfo')); // Fetch from localStorage for example
+                const { user } = userInfo;
+
+                // Set user details
+                document.getElementById('name').innerText = `Name: ${user.name}`;
+                document.getElementById('email').innerText = `Email: ${user.email}`;
+
+                // Update user status (this could be dynamic based on fetched user data)
+                const statusIndicator = document.getElementById('status');
+                statusIndicator.style.backgroundColor = 'green'; // Example
+            } catch (error) {
+                console.error('Error fetching user details:', error);
+            }
+        }
+
+        // Call functions when page loads
+        window.onload = async () => {
+            await fetchUserDetails();
+            await fetchIssues();
+            await getUserDetails();
+            await check();
+        };
+
+        document.getElementById('logout').addEventListener('click', function () {
+            // Show a confirmation dialog
+            const confirmation = confirm('Are you sure you want to log out?');
+
+            // If the user confirmed the logout
+            if (confirmation) {
+                localStorage.removeItem('token'); // Clear token
+                localStorage.removeItem('userInfo'); // Clear user info
+                alert('Logged out successfully.'); // Notify the user
+                window.location.href = 'login.html'; // Redirect to login page
+            }
+        });
+
+    </script>
+</body>
+
+</html>
