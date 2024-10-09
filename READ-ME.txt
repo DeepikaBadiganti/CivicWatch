@@ -1,9 +1,0 @@
-  =>  Template Name    : CivicWatch - Your Eyes on a Better Community
-
-  =>  Template Link    : https://htmlcodex.com/life-insurance-website-template
-
-  =>  Template License : https://htmlcodex.com/license (or read the LICENSE.txt file)
-
-  =>  Template Author  : Municipal Coporation of AP
-
-  =>  Author Website   : https://htmlcodex.com

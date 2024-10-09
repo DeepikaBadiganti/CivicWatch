@@ -33,3 +33,19 @@ mongoose.connect(process.env.MONGO_URI)
 const multer = require('multer');
 
 
+// ---------------------deployement---------------------
+
+const path = require("path");
+app.use(
+  express.static(path.join("D:", "My Projects", "BOVHackthon", "CivicIssues"))
+);
+
+// For all other routes, send the index.html file from the CivicIssues folder
+app.get("*", (req, res) => {
+  res.sendFile(
+    path.join("D:", "My Projects", "BOVHackthon", "CivicIssues", "index.html")
+  );
+});
+// ---------------------deployement---------------------
+
+
