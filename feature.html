@@ -49,7 +49,7 @@
     <div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a href="index.html" class="navbar-brand p-0">
+                <a href="/" class="navbar-brand p-0">
                     <h1 class="text-primary mb-0"><i class="fas fa-city me-2"></i> CivicWatch</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
@@ -58,30 +58,30 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav mx-0 mx-lg-auto">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Services</a>
-                        <a href="blogPage.html" class="nav-item nav-link">Blog</a>
-                        <a href="blog.html" class="nav-item nav-link">ReportIssue</a>
+                        <a href="/" class="nav-item nav-link">Home</a>
+                        <a href="/about" class="nav-item nav-link">About</a>
+                        <a href="/services" class="nav-item nav-link">Services</a>
+                        <a href="/blog" class="nav-item nav-link">Blog</a>
+                        <a href="/report-issue" class="nav-item nav-link">ReportIssue</a>
                         <div class="nav-item dropdown active">
                             <a href="#" class="nav-link" data-bs-toggle="dropdown">
                                 <span class="dropdown-toggle">Pages</span>
                             </a>
                             <div class="dropdown-menu">
-                                <a href="feature.html" class="dropdown-item active">Our Features</a>
-                                <a href="team.html" class="dropdown-item">Our team</a>
-                                <a href="blogPage.html" class="dropdown-item">Blog</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="FAQ.html" class="dropdown-item">FAQs</a>
+                                <a href="/features" class="dropdown-item active">Our Features</a>
+                                <a href="/team" class="dropdown-item">Our team</a>
+                                <a href="/blog" class="dropdown-item">Blog</a>
+                                <a href="/testimonial" class="dropdown-item">Testimonial</a>
+                                <a href="/FAQ" class="dropdown-item">FAQs</a>
 
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="/contact" class="nav-item nav-link">Contact</a>
                         <div class="nav-btn px-3">
                             <button class="btn-search btn btn-primary btn-md-square rounded-circle flex-shrink-0"
                                 data-bs-toggle="modal" data-bs-target="#searchModal"><i
                                     class="fas fa-search"></i></button>
-                            <a href="dashboard.html" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0">
+                            <a href="/dashboard" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0">
                                 DashBoard</a>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
         <div class="container text-center py-5" style="max-width: 900px;">
             <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Our Features</h4>
             <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Pages</a></li>
                 <li class="breadcrumb-item active text-primary">Feature</li>
             </ol>
@@ -242,7 +242,7 @@
                         <div class="row g-4">
                             <div class="col-md-6 col-lg-6 col-xl-5">
                                 <div class="footer-item">
-                                    <a href="index.html" class="p-0">
+                                    <a href="/" class="p-0">
                                         <h3 class="text-white"><i class="fab fa-slack me-3"></i> CivicWatch</h3>
                                     </a>
                                     <p class="text-white mb-4">Your one-stop platform for civic issues in Andhra
@@ -461,63 +461,63 @@
     <script src="js/main.js"></script>
     <script>
         async function check() {
-                const userinfo = localStorage.getItem('userInfo');
+            const userinfo = localStorage.getItem('userInfo');
 
-               console.log(userinfo)
-                if (!userinfo) {
-                    // if no token, redirect to the login page
-                    window.location.href = 'login.html';
-                }
+            console.log(userinfo)
+            if (!userinfo) {
+                // if no token, redirect to the login page
+                window.location.href = '/login';
             }
+        }
 
-            // Function to fetch user details and populate the modal
-            async function fetchUserDetails() {
-                const userName = document.getElementById('userName');
-                const userEmail = document.getElementById('userEmail');
-                const userStatus = document.getElementById('userStatus');
+        // Function to fetch user details and populate the modal
+        async function fetchUserDetails() {
+            const userName = document.getElementById('userName');
+            const userEmail = document.getElementById('userEmail');
+            const userStatus = document.getElementById('userStatus');
 
-                // Example: Fetch user details from localStorage (can replace with an API call)
-                const userInfo = JSON.parse(localStorage.getItem('userInfo')); // Fetch from localStorage
-                if (userInfo && userInfo.user) {
-                    const { user } = userInfo;
+            // Example: Fetch user details from localStorage (can replace with an API call)
+            const userInfo = JSON.parse(localStorage.getItem('userInfo')); // Fetch from localStorage
+            if (userInfo && userInfo.user) {
+                const { user } = userInfo;
 
-                    console.log('User data found:', user);
+                console.log('User data found:', user);
 
-                    // Populate the modal with user details
-                    userName.innerText = `Name: ${user.name}`;
-                    userEmail.innerText = `Email: ${user.email}`;
-                    userStatus.innerText = "Active";
-                    userStatus.classList.add('bg-success');
+                // Populate the modal with user details
+                userName.innerText = `Name: ${user.name}`;
+                userEmail.innerText = `Email: ${user.email}`;
+                userStatus.innerText = "Active";
+                userStatus.classList.add('bg-success');
 
-                    // Update status badge color based on the user's status
+                // Update status badge color based on the user's status
 
-                } else {
-                    console.error('No user data found in localStorage.');
-                    // Set default or fallback values if needed
-                    userName.innerText = 'Name: Not available';
-                    userEmail.innerText = 'Email: Not available';
-                    userStatus.innerText = 'Status: Unknown';
-                    userStatus.classList.add('bg-secondary');
-                }
+            } else {
+                console.error('No user data found in localStorage.');
+                // Set default or fallback values if needed
+                userName.innerText = 'Name: Not available';
+                userEmail.innerText = 'Email: Not available';
+                userStatus.innerText = 'Status: Unknown';
+                userStatus.classList.add('bg-secondary');
             }
+        }
 
-            // Add an event listener to the profile icon to trigger fetching user details when clicked
-            document.getElementById("profileIcon").addEventListener('click', fetchUserDetails);
+        // Add an event listener to the profile icon to trigger fetching user details when clicked
+        document.getElementById("profileIcon").addEventListener('click', fetchUserDetails);
 
-            window.onload = check;
+        window.onload = check;
 
-            document.getElementById('logout').addEventListener('click', function () {
-                    // Show a confirmation dialog
-                    const confirmation = confirm('Are you sure you want to log out?');
+        document.getElementById('logout').addEventListener('click', function () {
+            // Show a confirmation dialog
+            const confirmation = confirm('Are you sure you want to log out?');
 
-                    // If the user confirmed the logout
-                    if (confirmation) {
-                        localStorage.removeItem('token'); // Clear token
-                        localStorage.removeItem('userInfo'); // Clear user info
-                        alert('Logged out successfully.'); // Notify the user
-                        window.location.href = 'login.html'; // Redirect to login page
-                    }
-                });    
+            // If the user confirmed the logout
+            if (confirmation) {
+                localStorage.removeItem('token'); // Clear token
+                localStorage.removeItem('userInfo'); // Clear user info
+                alert('Logged out successfully.'); // Notify the user
+                window.location.href = '/login'; // Redirect to login page
+            }
+        });
 
     </script>
 

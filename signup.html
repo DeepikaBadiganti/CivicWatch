@@ -86,7 +86,7 @@
                         <button type="submit" class="btn btn-primary w-100">Signup</button>
                     </form>
                     <div class="text-center mt-4">
-                        <p>Already have an account? <a href="login.html">Login here</a></p>
+                        <p>Already have an account? <a href="/login">Login here</a></p>
                     </div>
                 </div>
             </div>
@@ -95,9 +95,9 @@
 
     <script>
         const userInfo = localStorage.getItem('userInfo');
-            if (userInfo) {
-                window.location.href = 'index.html';
-            }
+        if (userInfo) {
+            window.location.href = '/';
+        }
         document.getElementById('signupForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const name = document.getElementById('username').value;
@@ -118,7 +118,7 @@
             if (data.success) {
                 // Save token in local storage
                 alert('Signup successful! Please log in.');
-                window.location.href = 'login.html'; // Redirect to login page
+                window.location.href = '/login'; // Redirect to login page
             } else {
                 alert(data.message);
                 console.log(data.message);
